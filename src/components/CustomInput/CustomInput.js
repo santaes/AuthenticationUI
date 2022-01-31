@@ -1,0 +1,64 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable quotes */
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-trailing-spaces */
+/* eslint-disable prettier/prettier */
+import React from 'react';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { Controller } from 'react-hook-form';
+
+const CustomInput = ({
+  control,
+  name,
+  rules = {},
+  placeholder,
+  secureTextEntry,
+}) => {
+  return (
+    <Controller
+      control={control}
+      name={name}
+      rules={rules}
+      render={({
+        field: { value, onChange, onBlur },
+        fieldState: { error },
+      }) => (
+        <>
+          <View style={styles.container}>
+            <TextInput
+              value={value}
+              onChangeText={onChange}
+              onBlur={onBlur}
+              placeholder={placeholder}
+              style={styles.input}
+              secureTextEntry={secureTextEntry}
+            />
+          </View>
+          {error && (
+            <Text style={{ color: 'red', alignSelf: 'flex-start', left: 5 }}>
+              {error.message || 'Error'}
+            </Text>
+          )}
+        </>
+      )}
+    />
+  );
+};
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#ffffff',
+    width: '100%',
+    borderColor: '#e8e8e8',
+    borderWidth: 1,
+    borderRadius: 5,
+    top: 60,
+    paddingHorizontal: 10,
+    marginVertical: 8,
+  },
+  input: {},
+});
+
+export default CustomInput;
